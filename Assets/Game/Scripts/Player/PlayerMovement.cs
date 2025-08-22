@@ -44,10 +44,12 @@ public class PlayerMovement : MonoBehaviour
     private float _speed;
     private bool _isGrounded;
     private PlayerStance _playerStance;
+    private Animator _animator;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
         _speed = _walkSpeed;
         _playerStance = PlayerStance.Stand;
     }
@@ -110,7 +112,9 @@ public class PlayerMovement : MonoBehaviour
                     break;
                 default:
                     break;
-            } 
+            }
+            Vector3 velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
+            _animator.SetFloat("Velocity", velocity.magnitude * axisDirection.magnitude);
         }
         else if (isPlayerClimbing)
         {
