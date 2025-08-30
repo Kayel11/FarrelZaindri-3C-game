@@ -61,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     private float _hitDetectorRadius;
     [SerializeField]
     private LayerMask _hitLayer;
+    [SerializeField]
+    private PlayerAudioManager _playerAudioManager;
 
 
     private Rigidbody _rigidbody;
@@ -308,6 +310,7 @@ public class PlayerMovement : MonoBehaviour
             _playerStance = PlayerStance.Glide;
             _animator.SetBool("IsGliding", true);
             _cameraManager.SetFPSClampedCamera(true, transform.rotation.eulerAngles);
+            _playerAudioManager.PlayGlideSfx();
         }
     }
 
@@ -318,8 +321,9 @@ public class PlayerMovement : MonoBehaviour
             _playerStance = PlayerStance.Stand;
             _animator.SetBool("IsGliding", false);
             _cameraManager.SetFPSClampedCamera(false, transform.rotation.eulerAngles);
+            _playerAudioManager.StopGlideSfx();
         }
-    }
+    }  
 
     private void Punch()
     {
