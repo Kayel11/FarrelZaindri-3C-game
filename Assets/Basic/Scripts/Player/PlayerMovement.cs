@@ -63,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask _hitLayer;
     [SerializeField]
     private PlayerAudioManager _playerAudioManager;
+    [SerializeField]
+    private Transform _resetCheckpointPosition;
 
 
     private Rigidbody _rigidbody;
@@ -75,6 +77,15 @@ public class PlayerMovement : MonoBehaviour
     private int _combo = 0;
     private Coroutine _resetCombo;
     private Vector3 rotationDegree = Vector3.zero;
+
+    public void ResetPositionToCheckpoint()
+    {
+        if (_resetCheckpointPosition != null)
+        {
+            transform.position = _resetCheckpointPosition.position;
+            transform.rotation = _resetCheckpointPosition.rotation;
+        }
+    }
 
     private void Awake()
     {
